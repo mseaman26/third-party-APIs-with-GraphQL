@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
-var geoTrackingAPIKey = "dbb601e9b7c8bad902bd55c2a2689ca5"
+var geoTrackingAPIKey = process.env.WEATHER_API_KEY
 
 const resolvers = {
   Query: {
