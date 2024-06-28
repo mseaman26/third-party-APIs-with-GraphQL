@@ -4,8 +4,8 @@ const typeDefs = `
   type User {
     _id: ID!
     username: String!
-    city: String
-    sign: String
+    city: String!
+    sign: String!
   }
   
   type Auth {
@@ -19,7 +19,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(username: String!, password: String!, city: String, sign: String): Auth
+    createUser(username: String!, password: String!, city: String!, sign: String!): Auth
     login(username: String!, password: String!): Auth
   }
 `;

@@ -14,9 +14,11 @@ const userSchema = new Schema({
   },
   city: {
     type: String,
+    required: true
   },
   sign: {
     type: String,
+    required: true
   },
 });
 userSchema.pre('save', async function (next) {

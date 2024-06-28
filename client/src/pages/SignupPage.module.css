@@ -42,3 +42,22 @@
 .signupBox button:hover {
     background-color: #0056b3;
 }
+/* HomePage.module.css */
+
+.signSelection {
+    margin-bottom: 20px;
+  }
+  
+  .signLabel {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .signSelect {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
