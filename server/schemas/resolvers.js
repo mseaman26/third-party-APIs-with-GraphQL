@@ -6,15 +6,24 @@ const {getWeather, getHoroscopeData} = require('../utils/fetchFunctions')
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
-      const weatherData = await getWeather('san francisco')
-      const horoscopeData = await getHoroscopeData('leo')
-      console.log('weatherData: ', weatherData)
-      console.log('horoscopeData: ', horoscopeData)
+    dashboard: async (parent, args, context) => {
+      
     
      
       if (context.user) {
-        return await User.findOne({ _id: context.user._id });
+        const user =  await User.findOne({ _id: context.user._id });
+        const weatherData = await getWeather('san francisco')
+        const horoscopeData = await getHoroscopeData(user.sign)
+        console.log('weatherData: ', weatherData)
+        console.log('horoscopeData: ', horoscopeData)
+        return{
+          weather: weatherData.weather[0].description,
+          weatherIcon: weatherData.weather[0].icon,
+          temperature: Math.floor(weatherData.main.temp * (9/5) - 459.67),
+          horoscope: horoscopeData.data.horoscope_data,
+          meData: user
+        
+        }
       }
       throw AuthenticationError;
     },

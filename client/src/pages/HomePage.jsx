@@ -1,4 +1,4 @@
-import { QUERY_ME } from '../utils/queries';
+import { DASHBOARD_DATA } from '../utils/queries';
 import { Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import styles from './HomePage.module.css';
@@ -6,9 +6,17 @@ import styles from './HomePage.module.css';
 import Auth from '../utils/auth';
 
 const HomePage = () => {
-
-  const { loading, data } = useQuery(QUERY_ME);
-  const user = data?.me || {};
+  const user = Auth.getProfile().data
+  console.log('user: ', user)
+  const { loading, data } = useQuery(DASHBOARD_DATA, {
+    variables: { city: user.city, sign: user.sign },
+  });
+  console.log('data: ', data);
+  
+  const horoscope = data?.dashboard.horoscope || '';
+  const weather = data?.dashboard.weather || '';
+  const weatherIcon = data?.dashboard.weatherIcon || '';
+  const temperature = data?.dashboard.temperature || '';
 
   const logout = (event) => {
 
@@ -29,11 +37,22 @@ const HomePage = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.weather}>
-          <h2>Weather</h2>
-
+          <h2 className={styles.weatherTitle}>Weather</h2>
+          <p className={styles.weatherText}>{weather}</p>
+          {weatherIcon && (
+            <div className={styles.iconContainer}>
+              <img
+                className={styles.weatherIcon}
+                src={`http://openweathermap.org/img/w/${weatherIcon}.png`}
+                alt="weather icon"
+              />
+            </div>
+          )}
+            <p className={styles.weatherTemperature}>{temperature}°F</p>
         </div>
         <div className={styles.horoscope}>
           <h2>Horoscope</h2>
+          <p>{horoscope}</p>
         </div>
       </div>
     </div>

@@ -13,8 +13,15 @@ const typeDefs = `
     user: User
   }
 
+  type DashboardData{
+    weather: String
+    weatherIcon: String
+    temperature: Int
+    horoscope: String
+  }
+
   type Query {
-    me: User
+    dashboard(city: String!, sign: String!): DashboardData
     users: [User]
   }
 
