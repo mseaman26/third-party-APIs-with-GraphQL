@@ -1,8 +1,14 @@
 import { useRouteError } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export default function ErrorPage() {
   const error = useRouteError();
   console.error(error);
+
+  if(error.status === 404) {
+    return <Navigate to="/" />;
+  }
+
 
   return (
     <div id="error-page">

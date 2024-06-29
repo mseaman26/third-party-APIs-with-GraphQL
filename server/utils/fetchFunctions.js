@@ -12,8 +12,7 @@ module.exports = {
             if (!geoResponse.ok) {
               console.log('Failed to get geo data')
             }else{
-              console.log('georesponse: ', geoResponse)
-              console.log("Success")
+              console.log("GeoResponse ok")
             }
     
             const geoData = await geoResponse.json()

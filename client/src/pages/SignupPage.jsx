@@ -76,6 +76,7 @@ const SignupPage = () => {
                         id="sign"
                         onChange={handleChange}
                     >
+                        <option></option>
                         <option value="aries">Aries</option>
                         <option value="taurus">Taurus</option>
                         <option value="gemini">Gemini</option>
@@ -95,6 +96,13 @@ const SignupPage = () => {
                 </form>
                 <h2>Already have an account?</h2>
                 <Link to="/login">Login</Link>
+                <div className={styles.errorMessage}>
+                    {error && (
+                        <div>
+                            {error.message}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

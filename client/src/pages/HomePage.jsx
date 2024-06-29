@@ -6,17 +6,23 @@ import styles from './HomePage.module.css';
 import Auth from '../utils/auth';
 
 const HomePage = () => {
+  if (!Auth.loggedIn()) {
+    return <Navigate to="/login" />;
+  }
   const user = Auth.getProfile().data
   console.log('user: ', user)
   const { loading, data } = useQuery(DASHBOARD_DATA, {
     variables: { city: user.city, sign: user.sign },
   });
   console.log('data: ', data);
-  
-  const horoscope = data?.dashboard.horoscope || '';
-  const weather = data?.dashboard.weather || '';
-  const weatherIcon = data?.dashboard.weatherIcon || '';
-  const temperature = data?.dashboard.temperature || '';
+
+    //define variables for horoscope, weather, weatherIcon, and temperature
+    const horoscope = data?.dashboard?.horoscope || '';
+    const weather = data?.dashboard.weather || '';
+    const weatherIcon = data?.dashboard.weatherIcon || '';
+    const temperature = data?.dashboard.temperature || '';
+
+ 
 
   const logout = (event) => {
 
@@ -27,6 +33,9 @@ const HomePage = () => {
 
     console.log('redirecting');
     return <Navigate to="/login" />;
+  }
+  if(loading){
+    return <div>Loading...</div>  
   }
  
   return (
@@ -48,7 +57,7 @@ const HomePage = () => {
               />
             </div>
           )}
-            <p className={styles.weatherTemperature}>{temperature}°F</p>
+            {temperature && <p className={styles.weatherTemperature}>{temperature}°F</p>}
         </div>
         <div className={styles.horoscope}>
           <h2>Horoscope</h2>

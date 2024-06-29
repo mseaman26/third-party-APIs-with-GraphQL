@@ -8,20 +8,14 @@ const resolvers = {
   Query: {
     dashboard: async (parent, args, context) => {
       
-    
-     
-      if (context.user) {
-        const user =  await User.findOne({ _id: context.user._id });
+      if (context?.user) {
         const weatherData = await getWeather('san francisco')
-        const horoscopeData = await getHoroscopeData(user.sign)
+        const horoscopeData = await getHoroscopeData(context.user.sign)
         console.log('weatherData: ', weatherData)
         console.log('horoscopeData: ', horoscopeData)
+        //add properties to our data object that include weather(description), weatherIcon, temperature, and horoscope
         return{
-          weather: weatherData.weather[0].description,
-          weatherIcon: weatherData.weather[0].icon,
-          temperature: Math.floor(weatherData.main.temp * (9/5) - 459.67),
-          horoscope: horoscopeData.data.horoscope_data,
-          meData: user
+          
         
         }
       }
