@@ -15,7 +15,10 @@ const typeDefs = `
 
   type DashboardData{
     weather: String
-  }
+    weatherIcon: String
+    temperature: Int
+    horoscope: String
+  } 
 
   type Query {
     dashboard: DashboardData

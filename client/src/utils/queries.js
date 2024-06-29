@@ -3,9 +3,12 @@ import { gql } from '@apollo/client';
 
 
 export const DASHBOARD_DATA = gql`
-   query Query {
+query Query {
   dashboard {
-    weather: String
+    weather
+    temperature
+    horoscope
+    weatherIcon
   }
 }
 `;

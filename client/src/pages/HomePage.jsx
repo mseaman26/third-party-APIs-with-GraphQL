@@ -11,9 +11,7 @@ const HomePage = () => {
   }
   const user = Auth.getProfile().data
   console.log('user: ', user)
-  const { loading, data } = useQuery(DASHBOARD_DATA, {
-    variables: { city: user.city, sign: user.sign },
-  });
+  const { loading, data } = useQuery(DASHBOARD_DATA);
   console.log('data: ', data);
 
     //define variables for horoscope, weather, weatherIcon, and temperature

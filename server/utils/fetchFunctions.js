@@ -2,7 +2,7 @@ module.exports = {
     getWeather: async (location) => {
         var geoTrackingAPIKey = process.env.WEATHER_API_KEY
         try{
-            const geoResponse = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=san%20francisco&appid=${geoTrackingAPIKey}`, {
+            const geoResponse = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${geoTrackingAPIKey}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
